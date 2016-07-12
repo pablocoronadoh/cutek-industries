@@ -107,32 +107,32 @@
 						<p>Envíanos un mensaje directo y uno de nuestros asesores se pondrá en contacto contigo. 
 						<br /><span class="red">*</span>Campo Obligatorio</p>
 						<!-- Contact Form -->
-						<form>
-						  	<div class="form-group form-left col-md-6">
-						   	<label for="name">Nombre<span class="red">*</span></label>
-						   	<input type="text" class="form-control" id="name" placeholder="Escribe aquí tu nombre">
-						  	</div>
-						  	<div class="form-group form-right col-md-6">
-						   	<label for="email">Correo Electrónico<span class="red">*</span></label>
-						   	<input type="email" class="form-control" id="email" placeholder="Escribe aquí tu correo">
-						  	</div>
-						  	<div class="form-group form-left col-md-6">
-						   	<label for="phone">Teléfono</label>
-						   	<input type="tel" class="form-control" id="phone" placeholder="Escribe aquí tu teléfono">
-						  	</div>
-						  	<div class="form-group form-right col-md-6">
-						  		<label for="subject">Asunto<span class="red">*</span></label>
-						  		<select class="form-control" id="subject">
-									<option>Cotización</option>
-								  	<option>Duda o Aclaración</option>
-								  	<option>Seguimiento de Servicio</option>
+						<form id="emailsender" action="#" method="post">
+					  	<div class="form-group form-left col-md-6">
+					   	<label for="name">Nombre<span class="red">*</span></label>
+					   	<input type="text" class="form-control" id="name" placeholder="Escribe aquí tu nombre" required>
+					  	</div>
+					  	<div class="form-group form-right col-md-6">
+					   	<label for="email">Correo Electrónico<span class="red">*</span></label>
+					   	<input type="email" class="form-control" id="email" placeholder="Escribe aquí tu correo" required>
+					  	</div>
+					  	<div class="form-group form-left col-md-6">
+					   	<label for="phone">Teléfono</label>
+					   	<input type="tel" class="form-control" id="phone" placeholder="Escribe aquí tu teléfono" required>
+					  	</div>
+					  	<div class="form-group form-right col-md-6">
+					  		<label for="subject">Asunto<span class="red">*</span></label>
+					  		<select class="form-control" id="subject">
+								<option>Cotización</option>
+							  	<option>Duda o Aclaración</option>
+							  	<option>Seguimiento de Servicio</option>
 								</select>
-						  	</div>
-						  	<div class="form-group form-left form-right">
-						  		<label for="message">Mensaje<span class="red">*</span></label>
-						  		<textarea class="form-control" rows="3" id="message" placeholder="Escribe aquí tu mensaje..."></textarea>
-						  	</div>
-						  	<button type="submit" class="btn btn-danger">Enviar Mensaje <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+					  	</div>
+					  	<div class="form-group form-left form-right">
+					  		<label for="message">Mensaje<span class="red">*</span></label>
+					  		<textarea class="form-control" rows="3" id="message" placeholder="Escribe aquí tu mensaje..." required></textarea>
+					  	</div>
+					  	<button type="submit" class="btn btn-danger">Enviar Mensaje <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 						</form>
 					</div>
 				</div>
@@ -165,6 +165,19 @@
 				return false;
 			});
 		</script>
+		<script type="text/javascript">
+			$("#emailsender").on("submit",function(event){
+				event.preventDefault();
+				$.post("send_form_email.php",{
+					name:$("#name").val(),
+					email:$("#email").val(),
+					phone:$("#phone").val(),
+					subject:$("#subject").val(),
+					message:$("#message").val()}).
+				done(function(data){
+					alert(data);
+				});
+			});
+		</script>
 	</body>
-
 </html>
